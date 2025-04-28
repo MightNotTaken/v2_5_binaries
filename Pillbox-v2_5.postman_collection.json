@@ -1,0 +1,394 @@
+{
+	"info": {
+		"_postman_id": "979d293a-f051-487f-a505-b3324608191b",
+		"name": "Pillbox-v2_5",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33346244"
+	},
+	"item": [
+		{
+			"name": "V2_5",
+			"item": [
+				{
+					"name": "routes",
+					"item": [
+						{
+							"name": "device",
+							"item": [
+								{
+									"name": "find",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"where\": {\r\n        \"mac\": \"{{mac}}\"\r\n    },\r\n    \"relations\": [\"wifi\", \"medicines\"]\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host}}:{{port}}/api/v1/pillbox/find",
+											"host": [
+												"{{host}}"
+											],
+											"port": "{{port}}",
+											"path": [
+												"api",
+												"v1",
+												"pillbox",
+												"find"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "set-vial-status",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"mac\": \"{{mac}}\",\r\n    \"viles\": [0, 0, 0, 0, 0, 1]\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host}}:{{port}}/api/v1/pillbox/set-vile-status",
+											"host": [
+												"{{host}}"
+											],
+											"port": "{{port}}",
+											"path": [
+												"api",
+												"v1",
+												"pillbox",
+												"set-vile-status"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "medicines",
+							"item": [
+								{
+									"name": "add-medicine",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "[\r\n    {\r\n        \"mac\": \"{{mac}}\",\r\n        \"type\": \"pillbox\",\r\n        \"time\": \"{{time}}\",\r\n        \"vile\": 1,\r\n        \"pills\": 1,\r\n        \"repeat\": 10,\r\n        \"reference\": 1221,\r\n        \"windowSize\": 6,\r\n        \"muted\": false\r\n    }\r\n]",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host}}:{{port}}/api/v1/medicine",
+											"host": [
+												"{{host}}"
+											],
+											"port": "{{port}}",
+											"path": [
+												"api",
+												"v1",
+												"medicine"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "remove-medicine",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"reference\": [1221]\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host}}:{{port}}/api/v1/medicine",
+											"host": [
+												"{{host}}"
+											],
+											"port": "{{port}}",
+											"path": [
+												"api",
+												"v1",
+												"medicine"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "audio",
+							"item": [
+								{
+									"name": "download",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://{{host}}:3000/api/v1/audio/download?file=battery-low.mp3",
+											"protocol": "http",
+											"host": [
+												"{{host}}"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"v1",
+												"audio",
+												"download"
+											],
+											"query": [
+												{
+													"key": "file",
+													"value": "battery-low.mp3"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "trigger",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"file\":\"/1.mp3\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://192.168.4.1/audio-play",
+											"protocol": "http",
+											"host": [
+												"192",
+												"168",
+												"4",
+												"1"
+											],
+											"path": [
+												"audio-play"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "generate",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://{{host}}:3000/api/v1/audio/generate?file=ville-put-1.mp3&text=Please put vile in compartment 1",
+											"protocol": "http",
+											"host": [
+												"{{host}}"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"v1",
+												"audio",
+												"generate"
+											],
+											"query": [
+												{
+													"key": "file",
+													"value": "ville-put-1.mp3"
+												},
+												{
+													"key": "text",
+													"value": "Please put vile in compartment 1"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "local-add",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "file",
+													"type": "file",
+													"src": "/C:/Users/Tahir/Downloads/6.mp3"
+												}
+											]
+										},
+										"url": {
+											"raw": "http://{{device-ip}}/audio-download",
+											"protocol": "http",
+											"host": [
+												"{{device-ip}}"
+											],
+											"path": [
+												"audio-download"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "local-remove",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"file\":\"/compartment-1\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://{{device-ip}}/audio-remove",
+											"protocol": "http",
+											"host": [
+												"{{device-ip}}"
+											],
+											"path": [
+												"audio-remove"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "hardware",
+					"item": [
+						{
+							"name": "add credentials",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{device-ip}}/api/wifi/add?apName=fitfab&apPass=12345678",
+									"protocol": "http",
+									"host": [
+										"{{device-ip}}"
+									],
+									"path": [
+										"api",
+										"wifi",
+										"add"
+									],
+									"query": [
+										{
+											"key": "apName",
+											"value": "fitfab"
+										},
+										{
+											"key": "apPass",
+											"value": "12345678"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "remove credential",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{device-ip}}/api/wifi/id?id=0",
+									"protocol": "http",
+									"host": [
+										"{{device-ip}}"
+									],
+									"path": [
+										"api",
+										"wifi",
+										"id"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "0"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get credentials",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{device-ip}}/api/wifi/config",
+									"protocol": "http",
+									"host": [
+										"{{device-ip}}"
+									],
+									"path": [
+										"api",
+										"wifi",
+										"config"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
