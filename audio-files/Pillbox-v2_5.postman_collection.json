@@ -1,0 +1,287 @@
+{
+	"info": {
+		"_postman_id": "979d293a-f051-487f-a505-b3324608191b",
+		"name": "Pillbox-v2_5",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33346244"
+	},
+	"item": [
+		{
+			"name": "V2_5",
+			"item": [
+				{
+					"name": "routes",
+					"item": [
+						{
+							"name": "device",
+							"item": [
+								{
+									"name": "find",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"where\": {\r\n        \"mac\": \"{{mac}}\"\r\n    },\r\n    \"relations\": [\"wifi\", \"medicines\"]\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host}}:{{port}}/api/v1/pillbox/find",
+											"host": [
+												"{{host}}"
+											],
+											"port": "{{port}}",
+											"path": [
+												"api",
+												"v1",
+												"pillbox",
+												"find"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "set-vial-status",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"mac\": \"{{mac}}\",\r\n    \"viles\": [0, 0, 0, 1, 0, 1]\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host}}:{{port}}/api/v1/pillbox/set-vile-status",
+											"host": [
+												"{{host}}"
+											],
+											"port": "{{port}}",
+											"path": [
+												"api",
+												"v1",
+												"pillbox",
+												"set-vile-status"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "medicines",
+							"item": [
+								{
+									"name": "add-medicine",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "[\r\n    {\r\n        \"mac\": \"{{mac}}\",\r\n        \"type\": \"pillbox\",\r\n        \"time\": \"{{time}}\",\r\n        \"vile\": 6,\r\n        \"pills\": 1,\r\n        \"repeat\": 10,\r\n        \"reference\": 1221,\r\n        \"windowSize\": 10,\r\n        \"muted\": false\r\n    }\r\n]",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host}}:{{port}}/api/v1/medicine",
+											"host": [
+												"{{host}}"
+											],
+											"port": "{{port}}",
+											"path": [
+												"api",
+												"v1",
+												"medicine"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "remove-medicine",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"reference\": [1221]\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host}}:{{port}}/api/v1/medicine",
+											"host": [
+												"{{host}}"
+											],
+											"port": "{{port}}",
+											"path": [
+												"api",
+												"v1",
+												"medicine"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "hardware",
+			"item": [
+				{
+					"name": "add credentials",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{device-ip}}/api/wifi/add?apName=fitfab&apPass=12345678",
+							"protocol": "http",
+							"host": [
+								"{{device-ip}}"
+							],
+							"path": [
+								"api",
+								"wifi",
+								"add"
+							],
+							"query": [
+								{
+									"key": "apName",
+									"value": "fitfab"
+								},
+								{
+									"key": "apPass",
+									"value": "12345678"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove credential",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{device-ip}}/api/wifi/id?id=0",
+							"protocol": "http",
+							"host": [
+								"{{device-ip}}"
+							],
+							"path": [
+								"api",
+								"wifi",
+								"id"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get credentials",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{device-ip}}/api/wifi/config",
+							"protocol": "http",
+							"host": [
+								"{{device-ip}}"
+							],
+							"path": [
+								"api",
+								"wifi",
+								"config"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "test",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "rtl-ota",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": [
+										"/C:/Users/Tahir/OneDrive/Desktop/km0_km4_image2.bin",
+										"/C:/Users/Tahir/OneDrive/Desktop/km0_km4_image2.bin"
+									]
+								}
+							]
+						},
+						"url": {
+							"raw": "http://192.168.1.7:8082/update",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"1",
+								"7"
+							],
+							"port": "8082",
+							"path": [
+								"update"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
